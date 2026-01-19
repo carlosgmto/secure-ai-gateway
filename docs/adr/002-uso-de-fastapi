@@ -1,0 +1,15 @@
+k# 002. Selección de FastAPI como Framework Backend
+
+**Estado:** Aceptado
+**Fecha:** 2025-02-XX
+
+## Contexto
+El servidor de inferencia (RPi/Ollama) tiene una latencia alta (segundos por respuesta). Usar un framework síncrono (bloqueante) como Flask congelaría el servidor para otros usuarios mientras se espera la respuesta del LLM. Además, necesitamos validación estricta de datos para evitar inyecciones.
+
+## Decisión
+Usaremos **FastAPI** con el servidor **Uvicorn** (ASGI).
+
+## Consecuencias
+* **Positivo (Rendimiento):** Aprovechamos el modelo de **Concurrencia** (Event Loop) de Python. Podemos manejar cientos de peticiones esperando a la IA sin bloquear el hilo principal.
+* **Positivo (Seguridad):** Obtenemos validación de tipos automática gracias a **Pydantic**, reduciendo la superficie de ataque (Input Validation).
+* **Negativo:** Curva de aprendizaje del paradigma `async/await`. Requiere librerías asíncronas específicas (ej: `httpx` en lugar de `requests`).
