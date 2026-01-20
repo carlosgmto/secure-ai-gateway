@@ -5,7 +5,7 @@ import httpx
 app = FastAPI(title="Secure AI Gateway", version="0.1.0")
 
 # CONFIG (Moveremos esto a variables de entorno luego)
-RPI_URL = "http://xurly.local:11434/api/generate" # <--- CAMBIA POR TU IP DE LA RPi
+RPI_URL = "http://192.168.1.149:11434/api/generate"
 MODEL_NAME = "tinyllama"
 
 # Definimos qué esperamos recibir (Validación estricta)
